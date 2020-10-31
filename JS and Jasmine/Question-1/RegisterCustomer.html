@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width,initial-scale=1.0">
+    <title>Register a Customer</title>
+    <script src="Functions.js"></script> 
+    <style>
+        body{
+            font-size: 18px;
+            background-color:yellowgreen;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        form{
+            width : 600px;
+            padding : 40px;
+            border : 4px solid green;
+            background-color: ivory;
+            border-radius: 20px;  
+        }
+        h1{
+          text-align: center;
+        }
+        label{
+            display:block;
+            margin-bottom: 10px;
+        }
+        input{
+            display:block;
+            border:2px solid black;
+            padding:10px;
+            width:90%;
+            border-radius: 5px;
+        }
+        .row{
+            padding-bottom: 20px;
+        }
+        .err{
+            font-size:1em;
+            color :red;
+        }
+        button{
+            font-size: 20px;
+            display:block;
+            width:50%;
+            height:30px;
+            border-color:black;
+            background-color:green;
+            margin-top: 10px;
+            box-shadow: 0 3px 4px green;
+            border-radius: 10px;
+        }
+    </style> 
+    <script>
+        function showErr(ele, msg){
+            $get(ele).innerText = msg;
+        }
+        function validate(){
+            
+            let name = document.regForm.name.value;
+            let email = document.regForm.email.value;
+            let telephone = document.regForm.telephone.value;
+            let bill = document.regForm.bill.value;
+            let amount = document.regForm.amount.value;
+         
+            if(name == "" || name == null){
+                showErr("errName", "Name is mandatory")
+                return false;
+            }else{
+                showErr("errName", "")
+            }
+            
+            if(email == ""){
+                showErr("errEmail", "Email is mandatory")
+                return false;
+            }else{
+                showErr("errEmail", "")
+            }
+             regEx = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+[.com]$");
+            if(regEx.test(email) == false){
+                showErr("errEmail", "Email is not in a valid format")
+                return false;
+            } else {
+                showErr("errEmail", "")
+            }
+            
+            if(telephone==""){
+                showErr("errPhone", "Telephone No is mandatory")
+                return false;
+            }else{
+                showErr("errPhone", "")
+            }
+            regEx = new RegExp("^(0/91)?[7-9][0-9]{9}$");
+            if(regEx.test(telephone) == false){
+                showErr("errPhone", "Telephone No is not in a valid format")
+                return false;
+            } else {
+                showErr("errPhone", "")
+            }
+           
+            if(bill == "")
+            {
+                showErr("errBill","Please add Bill Date ")
+                return false;
+            }else {
+                showErr("errBill", "")
+            }
+            
+            if(amount == "")
+            {
+                showErr("errAmount","Please add Bill Amount")
+                return false;    
+            }else {
+                showErr("errAmount", "")
+            }
+           return true;
+        }
+    </script>
+
+<script>
+    class Customer{
+        constructor(name, email, telephone, bill, amount) {
+            this.name = name;
+            this.email = email;
+            this.telephone = telephone;
+            this.bill = bill;
+            this.amount = amount;
+        }
+    }
+</script>
+
+
+
+</head>
+<body>
+    <form action="" name="regForm" novalidate="true" onsubmit="return validate()">
+        <h1>Customer Register Application </h1>
+        <div class="row">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name"/>
+            <div id="errName" class="err"></div>
+        </div>
+        <div class="row">
+            <label for="email">Email Address</label>
+            <input type="email" name="email" id="email" />
+            <div id="errEmail" class="err"></div>
+        </div>
+        <div class="row">
+            <label for="telephone">Telephone No.</label>
+            <input type="text" name="telephone" id="telephone" />
+            <div id="errPhone" class="err"></div>
+        </div>
+        <div>
+            <label for ="bill">Billing Date </label>
+            <input type="datetime-local" name="bill" id="bill" />
+            <div id="errBill" class="err"></div>
+        </div>
+        <div class="row">
+            <label for="amount">Bill Amount</label>
+            <input type="text" name="amount" id="amount" />
+            <div id="errAmount" class="err"></div>
+        </div>
+        <button>Register a Customer</button>
+    </form>
+
+    <div>
+        <h2>Registered Customer</h2>
+        <table>
+        </table>
+    </div>
+</body>
+</html>
