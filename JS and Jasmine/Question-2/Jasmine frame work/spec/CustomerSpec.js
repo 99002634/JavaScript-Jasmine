@@ -1,4 +1,4 @@
-describe('Suite  to test classses',()=> {
+describe('Suite to test classes for Customers',()=> {
     let cus=null;
     beforeAll(()=>{
         console.log("this function is executed  before any of the operations begin");
